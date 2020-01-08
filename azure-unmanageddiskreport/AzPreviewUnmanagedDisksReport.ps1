@@ -273,6 +273,12 @@ foreach($subscriptionId in $SubscriptionIDs){
     $context = Get-AzContext
     Write-Host "The subscription context is set to: $($context.Name)`n"
 
+    #Get Virtual Machines in subscription
+    $VMName = get-azvm | Select-Object -ExpandProperty Name
+
+    #Get Resource Groups in subscription
+    $ResourceGroup = get-azresourcegroup | Select-Object -expandproperty ResourceGroupName
+    
     # Determine if we should get a single VM or Multiple
     if([string]::IsNullOrEmpty($VMname)){
         # Validate I have all the parameters
